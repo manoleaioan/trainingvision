@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: monospace;
 }
 
 body {
@@ -8,22 +9,22 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    /* height: 100vh; */
     margin: 0;
 }
 
 .header {
-    /* position: absolute;
-    top: 10px; */
-    border: 1px solid gray;
-    padding: 10px;
-    border-radius: 10px;
+    border-bottom: 1px solid gray;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 button {
     font-size: 16px;
     padding: 10px 20px;
-    margin-bottom: 20px;
+    background-color: transparent;
+    border: 1px solid black;
 }
 
 #shapes-container {
@@ -38,7 +39,7 @@ button {
     /* width: 2480px;
     height: 3508px; */
     box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
-    padding: 20;
+    padding: 20px;
     box-sizing: border-box;
     border: 1px solid #80808047;
     border-radius: 10px
