@@ -10,6 +10,7 @@ const shapes = {
     </svg>`
 };
 
+var page_format = 'a4';
 
 function getRandomSize() {
     return Math.floor(Math.random() * 100) + 50; // Adjust the range of sizes as needed
@@ -40,7 +41,7 @@ function generateRandomShapes() {
 
     const numShapes = 20;
     const strokeWidth = 10;
-    const shapeSize = 450 ;
+    const shapeSize = 450;
     const shapeMargin = 20;
 
     for (let i = 0; i < numShapes; i++) {
@@ -70,16 +71,40 @@ function generateRandomShapes() {
 
 function PrintElem(elem) {
     var mywindow = window.open('', 'PRINT', 'height=3508,width=2480');
-    
-    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-    mywindow.document.write('<link rel="stylesheet" href="style.css" onload="window.print();window.close();"></head><body>');
+
+    mywindow.document.write('<html><head><title>' + document.title + '</title>');
+    mywindow.document.write('<link rel="stylesheet" href="style.css" media="print" onload="window.print();window.close();">');
+    mywindow.document.write('</head><body>');
 
     mywindow.document.write(document.getElementById(elem).innerHTML);
-    
+
     mywindow.document.write('</body></html>');
-    
+
     mywindow.document.close(); // necessary for IE >= 10
     mywindow.focus(); // necessary for IE >= 10
 
     return true;
 }
+
+function ChangePageFormat() {
+    document.getElementById('shapes-container').classList.toggle('a4-page-size');
+    page_format = page_format === 'a4' ? 'responsive' : 'a4';
+
+    Ui_updatePageFormat();
+}
+
+function Ui_updatePageFormat() {
+    if (page_format == "a4") {
+        document.getElementById('a4').style.display = 'unset';
+        document.getElementById('responsive').style.display = 'none';
+    } else {
+        document.getElementById('responsive').style.display = 'unset';
+        document.getElementById('a4').style.display = 'none';
+    }
+}
+
+function Init() {
+    Ui_updatePageFormat();
+}
+
+Init()

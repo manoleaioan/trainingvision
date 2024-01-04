@@ -1,7 +1,19 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: system-ui;
+    font-family: 'Amazon Ember', sans-serif;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    /* font-family: 'Amazon Ember Cd RC', sans-serif;
+    font-family: 'Amazon Ember Display', sans-serif;
+    font-family: 'Amazon Ember Duospace', sans-serif;
+    font-family: 'Amazon Ember Mono', sans-serif;
+    font-family: 'Amazon Ember V2', sans-serif; */
+}
+
+a:visited {
+    color: black
 }
 
 body {
@@ -14,20 +26,28 @@ body {
 }
 
 .header {
+    display: flex;
     border-bottom: 1px solid gray;
     padding: 20px;
     box-sizing: border-box;
     width: 100%;
 }
 
+.header .ctrl {
+    margin-right: 10px !important;
+}
+
+.btn,
 button {
     font-size: 16px;
     padding: 10px 20px;
     background-color: transparent;
     border: 1px solid black;
+    cursor: default;
 }
 
-button:hover{
+.btn:hover,
+button:hover {
     background-color: black;
     color: white;
 }
@@ -41,18 +61,41 @@ button:hover{
     flex-wrap: wrap;
     overflow: auto;
 
+
     /* width: 2480px;
     height: 3508px; */
-    box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
+    /* box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%); */
     padding: 20px;
     box-sizing: border-box;
-    border: 1px solid #80808047;
-    border-radius: 10px
-    /* place-content: center; */
+    /* border: 1px solid #80808047; */
+        /* place-content: center; */
 }
 
 .shape {
     margin: 10px;
-    min-width: 250px;
-    min-height: 250px;
+    min-width: 50%;
+    min-height: 50%;
+}
+
+.a4-page-size {
+    width: 794px !important;
+    /* 210mm * 3.779528px/mm */
+    height: 1123px !important;
+    /* 297mm * 3.779528px/mm */
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    margin-top: 10px;
+}
+
+.settings {
+    display: flex;
+}
+
+.setting {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.opt {
+    display: none;
 }
