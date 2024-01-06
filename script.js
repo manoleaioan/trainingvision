@@ -11,6 +11,7 @@ const shapes = {
 };
 
 var page_format = 'a4';
+var outline = true;
 
 function getRandomSize() {
     return Math.floor(Math.random() * 100) + 50; // Adjust the range of sizes as needed
@@ -37,30 +38,32 @@ function getRandomShape() {
 
 function generateRandomShapes() {
     const shapesContainer = document.getElementById("shapes-container");
-    shapesContainer.innerHTML = ""; // Clear existing shapes
+    shapesContainer.innerHTML = "";
 
     const numShapes = 20;
     const strokeWidth = 10;
-    const shapeSize = 450;
-    const shapeMargin = 20;
+    const shapeSize = 250;
+    const shapeMargin = 0;
 
     for (let i = 0; i < numShapes; i++) {
         const shapeSVG = getRandomShape();
         const shape = document.createElement("div");
-        // shape.classList.add("shape");
-        shape.style.width = shapeSize + "px";
-        shape.style.height = shapeSize + "px";
+
+        // shape.style.width = shapeSize + "px";
+        // shape.style.height = shapeSize + "px";
         shape.style.strokeWidth = strokeWidth + "px";
         shape.style.stroke = "black"
         shape.style.margin = shapeMargin + "px";
+        shape.classList.add("item")
 
-        // Append the SVG content to the shape div
         shape.innerHTML = shapeSVG;
+
 
         // Apply other random properties if needed
         // shape.style.width = getRandomSize() + "px";
         // shape.style.height = getRandomSize() + "px";
-        shape.style.fill = "red"
+
+        shape.style.fill = !outline ? "black" : "transparent";
         // shape.style.backgroundColor = getRandomColor();
         // shape.style.transform = `rotate(${getRandomRotation()}deg)`;
 
@@ -74,23 +77,40 @@ function PrintElem(elem) {
 
     mywindow.document.write('<html><head><title>' + document.title + '</title>');
     mywindow.document.write('<link rel="stylesheet" href="style.css" media="print" onload="window.print();window.close();">');
+    mywindow.document.write('<style>@page { margin: 0; }</style>'); // Set margin to zero
     mywindow.document.write('</head><body>');
 
-    mywindow.document.write(document.getElementById(elem).innerHTML);
+    let printDiv = document.body.cloneNode(true);
+    printDiv.querySelector('#shapes-container').style.border='none';
+    // Remove the 'header' element from the cloned content
+    let headerElement = printDiv.querySelector('.header');
+    
+    if (headerElement) {
+        headerElement.parentNode.removeChild(headerElement);
+    }
+
+    mywindow.document.write(printDiv.innerHTML);
 
     mywindow.document.write('</body></html>');
 
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10
+    mywindow.document.close();
+    mywindow.focus();
 
     return true;
 }
+
 
 function ChangePageFormat() {
     document.getElementById('shapes-container').classList.toggle('a4-page-size');
     page_format = page_format === 'a4' ? 'responsive' : 'a4';
 
     Ui_updatePageFormat();
+}
+
+function ChangeFillType() {
+    outline = !outline;
+
+    Ui_updateShapeFillType();
 }
 
 function Ui_updatePageFormat() {
@@ -103,8 +123,19 @@ function Ui_updatePageFormat() {
     }
 }
 
+function Ui_updateShapeFillType() {
+    if (outline) {
+        document.getElementById('outline').style.display = 'unset';
+        document.getElementById('solid').style.display = 'none';
+    } else {
+        document.getElementById('solid').style.display = 'unset';
+        document.getElementById('outline').style.display = 'none';
+    }
+}
+
 function Init() {
     Ui_updatePageFormat();
+    Ui_updateShapeFillType();
 }
 
 Init()
