@@ -36,12 +36,11 @@ body {
     width: 100%;
 }
 
-.header .ctrl {
+.header .btn {
     margin-right: 10px !important;
 }
 
-.btn,
-button {
+.btn {
     font-size: 16px;
     padding: 10px 20px;
     background-color: transparent;
@@ -49,8 +48,7 @@ button {
     cursor: default;
 }
 
-.btn:hover,
-button:hover {
+.btn:hover {
     background-color: black;
     color: white;
 }
@@ -63,6 +61,7 @@ button:hover {
     align-items: center;
     flex-wrap: wrap;
     overflow: auto;
+    page-break-after: avoid !important;
 
 
     /* width: 2480px;
@@ -90,6 +89,11 @@ button:hover {
     height: 794px !important;
     /* 210mm * 3.779528px/mm */
     width: 1123px !important;
+
+
+    height: 297mm; /* A4 width */
+    width: 210mm; /* A4 height */
+
     /* 297mm * 3.779528px/mm */
     background-color: #ffffff;
     border: 1px solid #000000;
@@ -122,4 +126,22 @@ text-align: center;
 
 .item svg{
     width: 80% !important;
+}
+
+
+/* Custom styles for print */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .a4-page-size {
+        margin: 0;
+        padding: 0;
+    }
+
+    button {
+        display: none;
+    }
 }
