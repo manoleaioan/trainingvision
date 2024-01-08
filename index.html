@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="favicon.svg" type="image/x-icon">
 </head>
 
 <body>
-    <div class="header">
+    <div id="header">
         <div class="settings">
             <div class="setting btn" onclick="ChangePageFormat()">
                 <div id="a4" class="opt">
@@ -31,12 +32,17 @@
                     <i class="fa-regular fa-circle" id="outline"></i> Outline
                 </div>
             </div>
-
+            <div id="decsize" class="setting btn" onclick="ChangeShapeSize()">
+                <i class="fa-solid fa-minus"></i>
+            </div>
+            <div id="incsize" class="setting btn" onclick="ChangeShapeSize(true)">
+                <i class="fa-solid fa-plus"></i>
+            </div>
         </div>
         <button onclick="PrintElem()" class="btn"><i class="fa-solid fa-print"></i></button>
         <button onclick="generateRandomShapes()" class="btn"><i class="fa-solid fa-shapes"></i> Generate Shapes</button>
     </div>
-    <div id="shapes-container" class="a4-page-size"></div>
+    <div id="shapes-container" class=""></div>
     <script src="script.js"></script>
 </body>
 
