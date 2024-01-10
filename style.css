@@ -3,9 +3,7 @@
     padding: 0;
     font-family: 'Amazon Ember', sans-serif;
     -webkit-user-select: none;
-    /* Safari */
     -ms-user-select: none;
-    /* IE 10 and IE 11 */
     user-select: none;
     /* Standard syntax */
     /* font-family: 'Amazon Ember Cd RC', sans-serif;
@@ -25,7 +23,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* height: 100vh; */
     margin: 0;
 }
 
@@ -43,6 +40,11 @@ body {
 
 #header .btn {
     margin-right: 10px !important;
+    flex-wrap: wrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .btn {
@@ -52,6 +54,11 @@ body {
     border: 1px solid black;
     cursor: default;
 }
+
+.btn i {
+    margin: 0 5px !important;
+}
+
 
 .btn:hover {
     background-color: black;
@@ -118,6 +125,10 @@ body {
     /* width: 100% !important;
     height: 100% !important; */
     display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'FontAwesome';
 }
 
 
@@ -125,6 +136,11 @@ body {
     /* width: 80% !important; */
 }
 
+@media only screen and (max-width: 700px) {
+    .btn span{
+        display: none !important;
+    }
+}
 
 @media print {
     body {

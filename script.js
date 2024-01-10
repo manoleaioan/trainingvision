@@ -13,8 +13,14 @@ const shapes = {
     </svg>`,
     // foursquare: `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" stroke="black" viewBox="0 0 200 200" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs"><path  d="M165.963 134.037c-5.467 5.467-14.332 5.467-19.799 0l-24.137-24.138c-5.468-5.467-5.468-14.331 0-19.799l24.137-24.137c5.467-5.467 14.332-5.467 19.799 0L190.101 90.1c5.467 5.468 5.467 14.332 0 19.799l-24.138 24.138Zm-112.127 0c-5.467 5.467-14.332 5.467-19.8 0L9.9 109.899c-5.468-5.467-5.468-14.331 0-19.799l24.137-24.137c5.467-5.467 14.332-5.467 19.799 0L77.973 90.1c5.468 5.468 5.468 14.332 0 19.799l-24.137 24.138ZM109.9 190.1c-5.468 5.468-14.332 5.468-19.8 0l-24.137-24.137c-5.467-5.467-5.467-14.332 0-19.799l24.138-24.137c5.467-5.468 14.331-5.468 19.799 0l24.137 24.137c5.467 5.467 5.467 14.332 0 19.799L109.9 190.1Zm0-112.127c-5.468 5.468-14.332 5.468-19.8 0L65.963 53.836c-5.467-5.468-5.467-14.332 0-19.8L90.101 9.9c5.467-5.467 14.331-5.467 19.799 0l24.137 24.138c5.467 5.467 5.467 14.331 0 19.799L109.9 77.973Z"></path></svg>`,
     // cube: `<svg xmlns="http://www.w3.org/2000/svg" id="SvgjsSvg1130" width="200" height="200" viewBox="0 0 512 512" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs"><path d="m256.002 242.913 210.412-121.43L256.002 0 45.586 121.483zm-15.053 26.073L30.534 147.557v242.96L240.949 512zm30.107 0V512l210.41-121.483v-242.96z"></path></svg>`,
-    // drop: `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="none" viewBox="0 0 200 210" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs"><path d="M170 129.496C170 168.434 138.66 200 100 200s-70-31.566-70-70.504c0-36.857 35.84-81.29 65.113-122.542 2.4-3.381 7.425-3.415 9.861-.06C135.351 48.737 170 92.591 170 129.496Z"></path></svg>`,
-    // heart: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -28 512 512" width="200" height="200" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs"><path d="M471.383 44.578C444.879 15.832 408.512 0 368.973 0c-29.555 0-56.621 9.344-80.45 27.77C276.5 37.07 265.605 48.45 256 61.73c-9.602-13.277-20.5-24.66-32.527-33.96C199.648 9.344 172.582 0 143.027 0c-39.539 0-75.91 15.832-102.414 44.578C14.426 72.988 0 111.801 0 153.871c0 43.3 16.137 82.938 50.781 124.742 30.992 37.395 75.535 75.356 127.117 119.313 17.614 15.012 37.579 32.027 58.309 50.152A30.023 30.023 0 0 0 256 455.516a30.03 30.03 0 0 0 19.785-7.43c20.73-18.129 40.707-35.152 58.328-50.172 51.575-43.95 96.117-81.906 127.11-119.305C495.867 236.81 512 197.172 512 153.867c0-42.066-14.426-80.879-40.617-109.289zm0 0"></path></svg>`
+    // drop: `
+    // <svg viewBox="38.656 272.6229 140 195.6021" width="140" height="195.6021" xmlns="http://www.w3.org/2000/svg">
+    //   <path d="M 178.656 397.721 C 178.656 436.659 147.316 468.225 108.656 468.225 C 69.996 468.225 38.656 436.659 38.656 397.721 C 38.656 360.864 74.496 316.431 103.769 275.179 C 106.169 271.798 111.194 271.764 113.63 275.119 C 144.007 316.962 178.656 360.816 178.656 397.721 Z" style="fill: rgba(0, 0, 0, 0); stroke: rgb(0, 0, 0);" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"/>
+    // </svg>`,
+    heart: `
+    <svg width="100%" height="100%" viewBox="78 20 200 250" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 270.762 66.279 C 259.428 53.986 243.877 47.216 226.968 47.216 C 214.33 47.216 202.755 51.212 192.565 59.091 C 187.424 63.068 182.765 67.935 178.657 73.614 C 174.551 67.936 169.891 63.068 164.748 59.091 C 154.559 51.212 142.985 47.216 130.346 47.216 C 113.438 47.216 97.885 53.986 86.551 66.279 C 75.352 78.428 69.183 95.026 69.183 113.016 C 69.183 131.533 76.084 148.484 90.899 166.36 C 104.152 182.352 123.2 198.585 145.258 217.383 C 152.791 223.802 161.328 231.079 170.193 238.829 C 172.535 240.881 175.544 242.011 178.657 242.01 C 181.769 242.011 184.776 240.882 187.118 238.833 C 195.983 231.08 204.526 223.801 212.061 217.378 C 234.116 198.583 253.164 182.352 266.418 166.359 C 281.233 148.484 288.132 131.533 288.132 113.015 C 288.132 95.026 281.963 78.428 270.762 66.279 Z M 270.762 66.279" style="stroke-width: 24px; stroke: rgb(0, 0, 0);"></path>
+    </svg>`,
 };
 
 
@@ -22,8 +28,8 @@ var page_format = 'responsive';
 var outline = true;
 var numShapes = 100;
 var strokeWidth = 10;
-var shapeSize = 200;
-var shapeMargin = 10;
+var shapeSize = 190;
+var shapeMargin = 20;
 
 var generatedShapes = "";
 
@@ -50,31 +56,40 @@ function getRandomShape() {
     return shapes[randomShapeName];
 }
 
-function generateRandomShapes() {
+function getRandomAlphaNumericCharacter() {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    return characters.charAt(randomIndex);
+}
+
+
+function generateRandomShapes(letters = false) {
     const shapesContainer = document.getElementById("shapes-container");
     shapesContainer.innerHTML = "";
 
     for (let i = 0; i < numShapes; i++) {
-        const shapeSVG = getRandomShape();
-        const shape = document.createElement("div");
+        const shape = letters ? getRandomAlphaNumericCharacter() : getRandomShape();
+        const shapeDiv = document.createElement("div");
 
-        shape.style.width = shapeSize + "px";
-        shape.style.height = shapeSize + "px";
-        shape.style.strokeWidth = strokeWidth + "px";
-        shape.style.stroke = "black"
-        shape.style.margin = shapeMargin + "px";
-        shape.classList.add("item")
+        shapeDiv.style.width = shapeSize + "px";
+        shapeDiv.style.height = shapeSize + "px";
+        shapeDiv.style.fontSize = shapeSize + "px";
 
-        shape.innerHTML = shapeSVG;
+        shapeDiv.style.strokeWidth = strokeWidth + "px";
+        shapeDiv.style.stroke = "black"
+        shapeDiv.style.margin = shapeMargin + "px";
+        shapeDiv.classList.add("item")
+
+        shapeDiv.innerHTML = shape;
 
         // Apply other random properties if needed
         // shape.style.width = getRandomSize() + "px";
         // shape.style.height = getRandomSize() + "px";
         // shape.style.backgroundColor = getRandomColor();
         // shape.style.transform = `rotate(${getRandomRotation()}deg)`;
-        shape.style.fill = !outline ? "black" : "transparent";
+        shapeDiv.style.fill = !outline ? "black" : "transparent";
 
-        shapesContainer.appendChild(shape);
+        shapesContainer.appendChild(shapeDiv);
     }
 
     generatedShapes = shapesContainer.innerHTML;
@@ -94,7 +109,7 @@ function handleResize() {
 
         var isColliding = shapeRect.bottom + shapeMargin > shapesContainerRect.bottom;
 
-        shape.style.opacity = isColliding ? "0" : "1";
+        shape.style.opacity = isColliding ? "0.5" : "1";
 
         if (isColliding) {
             shape.remove();
@@ -139,6 +154,8 @@ function ChangePageFormat() {
         document.getElementById('shapes-container').classList.remove('a4-page-size');
     }
 
+    handleResize();
+
     Ui_updatePageFormat();
 }
 
@@ -155,6 +172,7 @@ function ChangeShapeSize(increase) {
         shapes.querySelectorAll('.item').forEach(shape => {
             shape.style.width = shapeSize + "px";
             shape.style.height = shapeSize + "px";
+            shape.style.fontSize = shapeSize + "px";
         });
     });
 }
@@ -199,11 +217,9 @@ function Ui_updateShapeFillType() {
 
 let holdInterval;
 
-function startHoldAction() {
-    let counter = 0;
-    holdInterval = setInterval(function () {
-        counter++;
-        ChangeShapeSize(true);
+function startHoldAction(increase = true) {
+    holdInterval = setInterval(() => {
+        ChangeShapeSize(increase);
     }, 100);
 }
 
@@ -212,30 +228,25 @@ function stopHoldAction() {
 }
 
 
-
 function Init() {
     window.addEventListener('resize', handleResize);
 
-    const holdButton = document.getElementById("incsize");
+    const IncholdButton = document.getElementById("incsize");
+    const DecholdButton = document.getElementById("decsize");
 
-    holdButton.addEventListener("mousedown", startHoldAction);
-    holdButton.addEventListener("mouseup", stopHoldAction);
-    holdButton.addEventListener("mouseout", stopHoldAction);
-    holdButton.addEventListener("touchstart", function (event) {
-        event.preventDefault();
-        startHoldAction();
-    });
+    IncholdButton.addEventListener("mousedown", startHoldAction);
+    IncholdButton.addEventListener("mouseup", stopHoldAction);
+    IncholdButton.addEventListener("mouseout", stopHoldAction);
+    IncholdButton.addEventListener("touchstart", startHoldAction);
+    IncholdButton.addEventListener("touchend", stopHoldAction);
+    IncholdButton.addEventListener("touchcancel", stopHoldAction);
 
-    holdButton.addEventListener("touchend", function (event) {
-        event.preventDefault();
-        stopHoldAction();
-    });
-
-    holdButton.addEventListener("touchcancel", function (event) {
-        event.preventDefault();
-        stopHoldAction();
-    });
-
+    DecholdButton.addEventListener("mousedown", () => startHoldAction(false));
+    DecholdButton.addEventListener("mouseup", stopHoldAction);
+    DecholdButton.addEventListener("mouseout", stopHoldAction);
+    DecholdButton.addEventListener("touchstart", () => startHoldAction(false));
+    DecholdButton.addEventListener("touchend", stopHoldAction);
+    DecholdButton.addEventListener("touchcancel", stopHoldAction);
 
     Ui_updatePageFormat();
     Ui_updateShapeFillType();
