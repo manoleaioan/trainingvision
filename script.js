@@ -26,12 +26,13 @@ const shapes = {
 
 var page_format = 'responsive';
 var outline = true;
-var numShapes = 100;
+var numShapes = 150;
 var strokeWidth = 10;
 var shapeSize = 190;
 var shapeMargin = 20;
 
 var generatedShapes = "";
+var ChangeShapeSizeTimeoutId = 0;
 
 function getRandomSize() {
     return Math.floor(Math.random() * 100) + 50; // Adjust the range of sizes as needed
@@ -64,7 +65,7 @@ function getRandomAlphaNumericCharacter() {
 
 
 function generateRandomShapes(letters = false) {
-    const shapesContainer = document.getElementById("shapes-container");
+    const shapesContainer = document.getElementById("shape-list");
     shapesContainer.innerHTML = "";
 
     for (let i = 0; i < numShapes; i++) {
@@ -78,16 +79,15 @@ function generateRandomShapes(letters = false) {
         shapeDiv.style.strokeWidth = strokeWidth + "px";
         shapeDiv.style.stroke = "black"
         shapeDiv.style.margin = shapeMargin + "px";
+        shapeDiv.style.fill = !outline ? "black" : "transparent";
+
         shapeDiv.classList.add("item")
 
         shapeDiv.innerHTML = shape;
 
         // Apply other random properties if needed
-        // shape.style.width = getRandomSize() + "px";
-        // shape.style.height = getRandomSize() + "px";
         // shape.style.backgroundColor = getRandomColor();
         // shape.style.transform = `rotate(${getRandomRotation()}deg)`;
-        shapeDiv.style.fill = !outline ? "black" : "transparent";
 
         shapesContainer.appendChild(shapeDiv);
     }
@@ -99,19 +99,22 @@ function generateRandomShapes(letters = false) {
 
 
 function handleResize() {
-    var shapesContainer = document.getElementById("shapes-container");
+    var shapesContainer = document.getElementById("shape-list");
 
     shapesContainer.innerHTML = generatedShapes;
 
-    document.querySelectorAll('.item').forEach(shape => {
+    let shapes = document.querySelectorAll('.item');
+
+    shapes.forEach(shape => {
         var shapesContainerRect = shapesContainer.getBoundingClientRect();
         var shapeRect = shape.getBoundingClientRect();
 
         var isColliding = shapeRect.bottom + shapeMargin > shapesContainerRect.bottom;
 
-        shape.style.opacity = isColliding ? "0.5" : "1";
+        // Testing purpose
+        // shape.style.opacity = isColliding ? "0.5" : "1";
 
-        if (isColliding) {
+        if (isColliding && document.querySelectorAll('.item').length > 1) {
             shape.remove();
         }
     });
@@ -123,12 +126,12 @@ function PrintElem() {
 
     mywindow.document.write('<html><head><title>' + document.title + '</title>');
     mywindow.document.write('<link rel="stylesheet" href="style.css" media="print" onload="window.print();window.close();">');
-    mywindow.document.write('<style>@page { margin: 0; }</style>'); // Set margin to zero
+    mywindow.document.write('<style>@page { margin: 0; }</style>');
     mywindow.document.write('</head><body>');
 
     let printDiv = document.body.cloneNode(true);
-    printDiv.querySelector('#shapes-container').style.border = 'none';
-    // Remove the 'header' element from the cloned content
+    printDiv.querySelector('#shape-list').style.border = 'none';
+
     let headerElement = printDiv.querySelector('#header');
 
     if (headerElement) {
@@ -149,9 +152,9 @@ function ChangePageFormat() {
     page_format = page_format === 'a4' ? 'responsive' : 'a4';
 
     if (page_format == 'a4') {
-        document.getElementById('shapes-container').classList.add('a4-page-size');
+        document.getElementById('shape-list').classList.add('a4-page-size');
     } else {
-        document.getElementById('shapes-container').classList.remove('a4-page-size');
+        document.getElementById('shape-list').classList.remove('a4-page-size');
     }
 
     handleResize();
@@ -167,12 +170,21 @@ function ChangeFillType() {
 
 function ChangeShapeSize(increase) {
     shapeSize += (increase ? 10 : -10);
+    if (shapeSize < 20) return;
 
     updateShapes(shapes => {
         shapes.querySelectorAll('.item').forEach(shape => {
             shape.style.width = shapeSize + "px";
             shape.style.height = shapeSize + "px";
             shape.style.fontSize = shapeSize + "px";
+            let sizeInfo = document.getElementsByClassName('shape-size-info')[0];
+            sizeInfo.innerHTML = `${increase ? '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>'
+                : '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>'} ${shapeSize}`;
+            sizeInfo.style.display = "block";
+            clearTimeout(ChangeShapeSizeTimeoutId);
+            ChangeShapeSizeTimeoutId = setTimeout(() => {
+                sizeInfo.style.display = "none";
+            }, 1000);
         });
     });
 }
