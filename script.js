@@ -153,10 +153,10 @@ function PrintElem() {
     mywindow.document.close();
     mywindow.focus();
 
-    setTimeout(function() {
+    setTimeout(function () {
         mywindow.print();
         mywindow.close();
-    }, 1000); 
+    }, 1000);
 
     return true;
 }
@@ -226,7 +226,7 @@ function Ui_updatePageFormat() {
     page_formats.forEach(format => {
         if (format === page_format) {
             document.getElementById(format).style.display = 'unset';
-        }else{
+        } else {
             document.getElementById(format).style.display = 'none';
         }
     });
@@ -260,11 +260,11 @@ function stopHoldAction() {
     clearInterval(holdInterval);
 }
 
-function saveLocal(){
+function saveLocal() {
     clearTimeout(saveTimeout);
 
     saveTimeout = setTimeout(() => {
-        localStorage.setItem('settings',  JSON.stringify({
+        localStorage.setItem('settings', JSON.stringify({
             shapeSize,
             page_format,
             outline,
@@ -273,13 +273,16 @@ function saveLocal(){
     }, 500);
 }
 
-function loadLocal(){
+function loadLocal() {
     const storedJsonString = JSON.parse(localStorage.getItem('settings'));
 
-    shapeSize = storedJsonString?.shapeSize || shapeSize;
-    page_format = storedJsonString?.page_format || page_format;
-    outline = storedJsonString?.outline || outline;
-    alphaNum = storedJsonString?.alphaNum || alphaNum;
+    if (storedJsonString && storedJsonString.shapeSize) {
+        shapeSize = storedJsonString.shapeSize;
+        page_format = storedJsonString.page_format;
+        outline = storedJsonString.outline;
+        alphaNum = storedJsonString.alphaNum;
+    }
+
 }
 
 function Init() {
