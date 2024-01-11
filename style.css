@@ -99,12 +99,21 @@ body {
     min-height: 50%;
 }
 
-.a4-page-size {
-    width: 794px !important;
-    height: 1123px !important;
+
+.a4, .a4l{
     background-color: #ffffff;
     border: 1px solid #000000;
     margin-top: 10px;
+}
+
+.a4 {
+    width: 794px !important;
+    height: 1123px !important;
+}
+
+.a4l {
+    height: 794px !important;
+    width: 1123px !important;
 }
 
 .settings {
@@ -156,7 +165,7 @@ body {
 }
 
 @media print {
-    body,  .a4-page-size {
+    body,  .a4, .a4l {
         margin: 0;
         padding: 0;
     }

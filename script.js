@@ -21,25 +21,25 @@ const shapes = {
     // <svg viewBox="38.656 272.6229 140 195.6021" width="140" height="195.6021" xmlns="http://www.w3.org/2000/svg">
     //   <path d="M 178.656 397.721 C 178.656 436.659 147.316 468.225 108.656 468.225 C 69.996 468.225 38.656 436.659 38.656 397.721 C 38.656 360.864 74.496 316.431 103.769 275.179 C 106.169 271.798 111.194 271.764 113.63 275.119 C 144.007 316.962 178.656 360.816 178.656 397.721 Z" style="fill: rgba(0, 0, 0, 0); stroke: rgb(0, 0, 0);" transform="matrix(0.9999999999999999, 0, 0, 0.9999999999999999, 0, 0)"/>
     // </svg>`,
-    heart: `
-    <svg width="100%" height="100%" viewBox="78 20 200 250" xmlns="http://www.w3.org/2000/svg">
+    heart: `<svg width="100%" height="100%" viewBox="78 20 200 250" xmlns="http://www.w3.org/2000/svg">
       <path d="M 270.762 66.279 C 259.428 53.986 243.877 47.216 226.968 47.216 C 214.33 47.216 202.755 51.212 192.565 59.091 C 187.424 63.068 182.765 67.935 178.657 73.614 C 174.551 67.936 169.891 63.068 164.748 59.091 C 154.559 51.212 142.985 47.216 130.346 47.216 C 113.438 47.216 97.885 53.986 86.551 66.279 C 75.352 78.428 69.183 95.026 69.183 113.016 C 69.183 131.533 76.084 148.484 90.899 166.36 C 104.152 182.352 123.2 198.585 145.258 217.383 C 152.791 223.802 161.328 231.079 170.193 238.829 C 172.535 240.881 175.544 242.011 178.657 242.01 C 181.769 242.011 184.776 240.882 187.118 238.833 C 195.983 231.08 204.526 223.801 212.061 217.378 C 234.116 198.583 253.164 182.352 266.418 166.359 C 281.233 148.484 288.132 131.533 288.132 113.015 C 288.132 95.026 281.963 78.428 270.762 66.279 Z M 270.762 66.279" style="stroke-width: 24px; stroke: rgb(0, 0, 0);"></path>
     </svg>`,
 };
 
+const page_formats = ['a4', 'a4l', 'responsive'];
 
 var page_format = 'responsive';
 var outline = true;
 var numShapes = 150;
 var strokeWidth = 10;
-var shapeSize = 190;
+var shapeSize = 140;
 var shapeMargin = 20;
 
 var generatedShapes = "";
 var ChangeShapeSizeTimeoutId = 0;
 
 function getRandomSize() {
-    return Math.floor(Math.random() * 100) + 50; // Adjust the range of sizes as needed
+    return Math.floor(Math.random() * 100) + 50;
 }
 
 function getRandomColor() {
@@ -129,7 +129,7 @@ function PrintElem() {
     var mywindow = window.open('', 'PRINT', 'height=3508,width=2480');
 
     mywindow.document.write('<html><head><title>' + document.title + '</title>');
-    mywindow.document.write('<link rel="stylesheet" href="style.css" media="print" onload="window.print();window.close();">');
+    mywindow.document.write('<link rel="stylesheet" href="style.css" media="print">');
     mywindow.document.write('<style>@page { margin: 0; }</style>');
     mywindow.document.write('</head><body>');
 
@@ -149,17 +149,26 @@ function PrintElem() {
     mywindow.document.close();
     mywindow.focus();
 
+    setTimeout(function() {
+        mywindow.print();
+        mywindow.close();
+    }, 1000); 
+
     return true;
 }
 
-function ChangePageFormat() {
-    page_format = page_format === 'a4' ? 'responsive' : 'a4';
 
-    if (page_format == 'a4') {
-        document.getElementById('shape-list').classList.add('a4-page-size');
-    } else {
-        document.getElementById('shape-list').classList.remove('a4-page-size');
-    }
+function ChangePageFormat() {
+    const currentPageFormatIndex = page_formats.findIndex(format => format === page_format);
+    const nextIndex = (currentPageFormatIndex + 1) % page_formats.length;
+    page_format = page_formats[nextIndex]
+
+    page_formats.map((format, index) => {
+        if (index === nextIndex) {
+            document.getElementById('shape-list').classList = page_format;
+        }
+    });
+
 
     handleResize();
 
@@ -205,13 +214,13 @@ function updateShapes(callback) {
 }
 
 function Ui_updatePageFormat() {
-    if (page_format === "a4") {
-        document.getElementById('a4').style.display = 'unset';
-        document.getElementById('responsive').style.display = 'none';
-    } else {
-        document.getElementById('responsive').style.display = 'unset';
-        document.getElementById('a4').style.display = 'none';
-    }
+    page_formats.forEach(format => {
+        if (format === page_format) {
+            document.getElementById(format).style.display = 'unset';
+        }else{
+            document.getElementById(format).style.display = 'none';
+        }
+    });
 }
 
 function Ui_updateShapeFillType() {
