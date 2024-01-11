@@ -276,10 +276,10 @@ function saveLocal(){
 function loadLocal(){
     const storedJsonString = JSON.parse(localStorage.getItem('settings'));
 
-    shapeSize = storedJsonString.shapeSize;
-    page_format = storedJsonString.page_format;
-    outline = storedJsonString.outline;
-    alphaNum = storedJsonString.alphaNum;
+    shapeSize = storedJsonString?.shapeSize || shapeSize;
+    page_format = storedJsonString?.page_format || page_format;
+    outline = storedJsonString?.outline || outline;
+    alphaNum = storedJsonString?.alphaNum || alphaNum;
 }
 
 function Init() {
