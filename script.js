@@ -34,9 +34,12 @@ var numShapes = 150;
 var strokeWidth = 10;
 var shapeSize = 140;
 var shapeMargin = 20;
+var alphaNum = true;
 
 var generatedShapes = "";
 var ChangeShapeSizeTimeoutId = 0;
+var holdInterval;
+var saveTimeout;
 
 function getRandomSize() {
     return Math.floor(Math.random() * 100) + 50;
@@ -68,12 +71,13 @@ function getRandomAlphaNumericCharacter() {
 }
 
 
-function generateRandomShapes(letters = false) {
+function generateRandomShapes(generateAlphaNumeric = false) {
+    alphaNum = generateAlphaNumeric;
     const shapesContainer = document.getElementById("shape-list");
     shapesContainer.innerHTML = "";
 
     for (let i = 0; i < numShapes; i++) {
-        const shape = letters ? getRandomAlphaNumericCharacter() : getRandomShape();
+        const shape = generateAlphaNumeric ? getRandomAlphaNumericCharacter() : getRandomShape();
         const shapeDiv = document.createElement("div");
 
         shapeDiv.style.width = shapeSize + "px";
@@ -169,16 +173,19 @@ function ChangePageFormat() {
         }
     });
 
-
     handleResize();
 
     Ui_updatePageFormat();
+
+    saveLocal();
 }
 
 function ChangeFillType() {
     outline = !outline;
 
     Ui_updateShapeFillType();
+
+    saveLocal();
 }
 
 function ChangeShapeSize(increase) {
@@ -200,6 +207,8 @@ function ChangeShapeSize(increase) {
             }, 1000);
         });
     });
+
+    saveLocal();
 }
 
 function updateShapes(callback) {
@@ -221,6 +230,8 @@ function Ui_updatePageFormat() {
             document.getElementById(format).style.display = 'none';
         }
     });
+
+    document.getElementById('shape-list').classList = page_format;
 }
 
 function Ui_updateShapeFillType() {
@@ -239,9 +250,6 @@ function Ui_updateShapeFillType() {
     });
 }
 
-
-let holdInterval;
-
 function startHoldAction(increase = true) {
     holdInterval = setInterval(() => {
         ChangeShapeSize(increase);
@@ -252,6 +260,27 @@ function stopHoldAction() {
     clearInterval(holdInterval);
 }
 
+function saveLocal(){
+    clearTimeout(saveTimeout);
+
+    saveTimeout = setTimeout(() => {
+        localStorage.setItem('settings',  JSON.stringify({
+            shapeSize,
+            page_format,
+            outline,
+            alphaNum
+        }));
+    }, 500);
+}
+
+function loadLocal(){
+    const storedJsonString = JSON.parse(localStorage.getItem('settings'));
+
+    shapeSize = storedJsonString.shapeSize;
+    page_format = storedJsonString.page_format;
+    outline = storedJsonString.outline;
+    alphaNum = storedJsonString.alphaNum;
+}
 
 function Init() {
     window.addEventListener('resize', handleResize);
@@ -273,8 +302,12 @@ function Init() {
     DecholdButton.addEventListener("touchend", stopHoldAction);
     DecholdButton.addEventListener("touchcancel", stopHoldAction);
 
+    loadLocal();
+
     Ui_updatePageFormat();
     Ui_updateShapeFillType();
+
+    generateRandomShapes(alphaNum);
 }
 
 Init()
