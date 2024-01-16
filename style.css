@@ -5,12 +5,25 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    touch-action: pan-x pan-y !important;
+    user-select: none !important;
     /* Standard syntax */
     /* font-family: 'Amazon Ember Cd RC', sans-serif;
     font-family: 'Amazon Ember Display', sans-serif;
     font-family: 'Amazon Ember Duospace', sans-serif;
     font-family: 'Amazon Ember Mono', sans-serif;
     font-family: 'Amazon Ember V2', sans-serif; */
+}
+
+html {
+    touch-action: manipulation;
+}
+
+meta[name=viewport] {
+    width: device-width;
+    initial-scale: 1;
+    maximum-scale: 1;
+    user-scalable: no;
 }
 
 a,
@@ -34,7 +47,7 @@ body {
     width: 100%;
 }
 
- .hidden {
+.hidden {
     display: none !important;
 }
 
@@ -100,7 +113,8 @@ body {
 }
 
 
-.a4, .a4l{
+.a4,
+.a4l {
     background-color: #ffffff;
     border: 1px solid #000000;
     margin-top: 10px;
@@ -141,7 +155,7 @@ body {
     /* width: 80% !important; */
 }
 
-.shape-size-info{
+.shape-size-info {
     position: absolute;
     margin-top: 4px;
     text-align: left;
@@ -159,13 +173,15 @@ body {
 }
 
 @media only screen and (max-width: 700px) {
-    .btn span{
+    .btn span {
         display: none !important;
     }
 }
 
 @media print {
-    body,  .a4, .a4l {
+    body,
+    .a4,
+    .a4l {
         margin: 0;
         padding: 0;
     }
