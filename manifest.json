@@ -1,7 +1,7 @@
 {
     "name": "Random Shapes Generator",
     "short_name": "Training Vision",
-    "start_url": "/",
+    "start_url": "/trainingvision",
     "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#ffffff"
