@@ -311,6 +311,14 @@ function Init() {
     Ui_updateShapeFillType();
 
     generateRandomShapes(alphaNum);
+
+    var userAgent = navigator.userAgent;
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
+
+    if (!isMobile) {
+        document.getElementsByClassName('printBtn')[0].classList.remove('hidden');
+        document.getElementsByClassName('formatBtn')[0].classList.remove('hidden');
+    }
 }
 
 Init()
