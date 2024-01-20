@@ -190,7 +190,10 @@ function ChangeFillType() {
 
 function ChangeShapeSize(increase) {
     shapeSize += (increase ? 10 : -10);
-    if (shapeSize < 20) return;
+    if (shapeSize < 20) {
+        shapeSize = 20;
+        return;
+    } 
 
     updateShapes(shapes => {
         shapes.querySelectorAll('.item').forEach(shape => {
