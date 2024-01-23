@@ -93,7 +93,7 @@ body {
     padding: 20px;
     box-sizing: border-box;
     page-break-after: avoid !important;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
     /* box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%); */
 
@@ -120,7 +120,7 @@ body {
 }
 
 .a4 {
-    width: 794px !important;
+    width: 210mm !important;
     height: 1123px !important;
 }
 
@@ -182,6 +182,7 @@ body {
 }
 
 @media print {
+    html,
     body,
     .a4,
     .a4l {

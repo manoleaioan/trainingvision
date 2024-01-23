@@ -82,7 +82,7 @@ function generateRandomShapes(generateAlphaNumeric = false) {
 
         shapeDiv.style.width = shapeSize + "px";
         shapeDiv.style.height = shapeSize + "px";
-        shapeDiv.style.fontSize = shapeSize + "px";
+        shapeDiv.style.fontSize = shapeSize + 30+ "px";
 
         shapeDiv.style.strokeWidth = strokeWidth + "px";
         shapeDiv.style.stroke = "black"
