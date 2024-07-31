@@ -30,6 +30,7 @@ const page_formats = ['a4', 'a4l', 'responsive'];
 
 var page_format = 'responsive';
 var outline = true;
+var contrast = false;
 var numShapes = 150;
 var strokeWidth = 10;
 var shapeSize = 140;
@@ -70,7 +71,6 @@ function getRandomAlphaNumericCharacter() {
     return characters.charAt(randomIndex);
 }
 
-
 function generateRandomShapes(generateAlphaNumeric = false) {
     alphaNum = generateAlphaNumeric;
     const shapesContainer = document.getElementById("shape-list");
@@ -105,7 +105,6 @@ function generateRandomShapes(generateAlphaNumeric = false) {
     handleResize();
 }
 
-
 function handleResize() {
     var shapesContainer = document.getElementById("shape-list");
 
@@ -127,7 +126,6 @@ function handleResize() {
         }
     });
 }
-
 
 function PrintElem() {
     var mywindow = window.open('', 'PRINT', 'height=3508,width=2480');
@@ -161,6 +159,13 @@ function PrintElem() {
     return true;
 }
 
+function ChangeContrast(){
+    contrast = !contrast;
+
+    Ui_updateContrast();
+
+    saveLocal();
+}
 
 function ChangePageFormat() {
     const currentPageFormatIndex = page_formats.findIndex(format => format === page_format);
@@ -225,6 +230,18 @@ function updateShapes(callback) {
     handleResize();
 }
 
+function Ui_updateContrast() {
+    if (contrast) {
+        document.getElementById('light').style.display = 'unset';
+        document.getElementById('dark').style.display = 'none';
+    } else {
+        document.getElementById('dark').style.display = 'unset';
+        document.getElementById('light').style.display = 'none';
+    }
+
+    document.documentElement.style.filter =  contrast ? "invert(1)" : "invert(0)";
+}
+
 function Ui_updatePageFormat() {
     page_formats.forEach(format => {
         if (format === page_format) {
@@ -271,7 +288,8 @@ function saveLocal() {
             shapeSize,
             page_format,
             outline,
-            alphaNum
+            alphaNum,
+            contrast
         }));
     }, 500);
 }
@@ -283,9 +301,9 @@ function loadLocal() {
         shapeSize = storedJsonString.shapeSize;
         page_format = storedJsonString.page_format;
         outline = storedJsonString.outline;
+        contrast = storedJsonString.contrast;
         alphaNum = storedJsonString.alphaNum;
     }
-
 }
 
 function Init() {
@@ -312,6 +330,7 @@ function Init() {
 
     Ui_updatePageFormat();
     Ui_updateShapeFillType();
+    Ui_updateContrast();
 
     generateRandomShapes(alphaNum);
 
