@@ -66,6 +66,7 @@ body {
     background-color: transparent;
     border: 1px solid black;
     cursor: default;
+    min-width: 16px;
 }
 
 
