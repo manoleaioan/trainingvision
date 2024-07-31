@@ -36,6 +36,7 @@ var strokeWidth = 10;
 var shapeSize = 140;
 var shapeMargin = 20;
 var alphaNum = true;
+var color = "black";
 
 var generatedShapes = "";
 var ChangeShapeSizeTimeoutId = 0;
@@ -82,12 +83,13 @@ function generateRandomShapes(generateAlphaNumeric = false) {
 
         shapeDiv.style.width = shapeSize + "px";
         shapeDiv.style.height = shapeSize + "px";
-        shapeDiv.style.fontSize = shapeSize + 30+ "px";
+        shapeDiv.style.fontSize = shapeSize + 30 + "px";
 
         shapeDiv.style.strokeWidth = strokeWidth + "px";
-        shapeDiv.style.stroke = "black"
+        shapeDiv.style.stroke = color;
+        shapeDiv.style.color = color;
         shapeDiv.style.margin = shapeMargin + "px";
-        shapeDiv.style.fill = !outline ? "black" : "transparent";
+        shapeDiv.style.fill = !outline ? color : "transparent";
 
         shapeDiv.classList.add("item")
 
@@ -103,6 +105,7 @@ function generateRandomShapes(generateAlphaNumeric = false) {
     generatedShapes = shapesContainer.innerHTML;
 
     handleResize();
+    saveLocal();
 }
 
 function handleResize() {
@@ -159,8 +162,9 @@ function PrintElem() {
     return true;
 }
 
-function ChangeContrast(){
+function ChangeContrast() {
     contrast = !contrast;
+    color = contrast ? "white" : "black";
 
     Ui_updateContrast();
 
@@ -198,7 +202,7 @@ function ChangeShapeSize(increase) {
     if (shapeSize < 20) {
         shapeSize = 20;
         return;
-    } 
+    }
 
     updateShapes(shapes => {
         shapes.querySelectorAll('.item').forEach(shape => {
@@ -239,7 +243,7 @@ function Ui_updateContrast() {
         document.getElementById('light').style.display = 'none';
     }
 
-    document.documentElement.style.filter =  contrast ? "invert(1)" : "invert(0)";
+    document.documentElement.classList = contrast ? 'inverted' : '';
 }
 
 function Ui_updatePageFormat() {
