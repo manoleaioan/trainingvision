@@ -45,6 +45,16 @@
                     <i class="fa-regular fa-circle" id="outline"></i><span> Outline</span>
                 </div>
             </div>
+
+            <div class="setting btn" onclick="ChangeDisplayFormat()">
+                <div id="flex" class="opt">
+                    <i class="fa-solid fa-up-right-and-down-left-from-center"></i></i><span></span>
+                </div>
+                <div id="grid" class="opt">
+                    <i class="fa solid fa-table-cells-large"></i><span></span>
+                </div>
+            </div>
+
             <div id="decsize" class="setting btn" onclick="ChangeShapeSize()">
                 <i class="fa-solid fa-minus"></i>
             </div>
@@ -52,13 +62,16 @@
                 <i class="fa-solid fa-plus"></i>
             </div>
         </div>
+
         <div onclick="PrintElem()" class="btn hidden printBtn"><i class="fa-solid fa-print"></i></div>
+
         <div onclick="generateRandomShapes()" class="btn">
             <div>
                 <i class="fa-solid fa-shapes"></i>
                 <span> Generate Shapes</span>
             </div>
         </div>
+
         <div onclick="generateRandomShapes(true)" class="btn">
             <div>
                 <i class="fa-solid fa-a"></i>
@@ -66,6 +79,7 @@
             </div>
         </div>
     </div>
+
     <div id="shapes-container" class="">
         <div id="client-info"></div>
         <div class="shape-size-info">
@@ -73,6 +87,7 @@
         </div>
         <div id="shape-list"></div>
     </div>
+
     <script src="script.js"></script>
 </body>
 

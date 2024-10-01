@@ -85,27 +85,42 @@ body {
     text-decoration: none
 }
 
+#shapes-container {
+    width: 100%;
+}
+
 #shape-list {
     width: 100%;
-    height: 92vh;
+    height: 94vh;
+    /* height: 100%; */
+    box-sizing: border-box;
+    page-break-after: avoid !important;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.dark #shape-list {
+    background-color: white;
+}
+
+.white #shape-list {
+    background-color: black;
+}
+
+.flex {
     display: flex;
     justify-content: space-evenly;
-    /* align-content: center; */
     align-items: center;
     flex-wrap: wrap;
     padding: 20px;
-    box-sizing: border-box;
-    page-break-after: avoid !important;
-    /* overflow: hidden; */
-    position: relative;
-    /* box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%); */
+}
 
-    /* display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 5fr);
-    gap: 20px; */
-
-    /* border: 1px solid #000000; */
+.grid {
+    display: grid;
+    gap: 10px;
+    padding: 0;
 }
 
 .shape {
@@ -114,11 +129,39 @@ body {
     min-height: 50%;
 }
 
+.grid .item {
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+    /* aspect-ratio: 1 / 1; */
+}
+
+/* .grid .item::before, 
+.grid .item::after {
+  content: '';
+  position: absolute;
+  background-color: black;
+  z-index: 1;
+}
+
+.grid .item::after {
+  inline-size: 100vw;
+  block-size: 4px;
+  inset-inline-start: -7px;
+  inset-block-start: -7px;
+}
+
+.grid .item::before {
+  inline-size: 4px;
+  block-size: 100vh;
+  inset-block-start: -8px;
+  inset-inline-start: -8px;
+} */
 
 .a4,
 .a4l {
     border: 1px solid #595959;
-    margin-top: 10px;
+    /* margin-top: 10px !important; */
 }
 
 .a4 {
@@ -142,15 +185,21 @@ body {
 .item {
     height: 100%;
     text-align: center;
-    /* width: 100% !important;
-    height: 100% !important; */
     display: block;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Amazon Ember Display', sans-serif;
+    /* border: 1px solid black; */
 }
 
+.white .item {
+    background-color: #fff;
+}
+
+.dark .item{
+    background-color: #000;
+}
 
 .item svg {
     /* width: 80% !important; */
@@ -175,10 +224,14 @@ body {
 
 .inverted {
     filter: invert(1);
-    -webkit-filter: invert(1); /* Safari and Chrome */
-    -moz-filter: invert(1); /* Firefox */
-    -ms-filter: invert(1); /* Internet Explorer */
-    -o-filter: invert(1); /* Opera */
+    -webkit-filter: invert(1);
+    /* Safari and Chrome */
+    -moz-filter: invert(1);
+    /* Firefox */
+    -ms-filter: invert(1);
+    /* Internet Explorer */
+    -o-filter: invert(1);
+    /* Opera */
 }
 
 @media only screen and (max-width: 700px) {
@@ -192,6 +245,7 @@ body {
 }
 
 @media print {
+
     html,
     body,
     .a4,
