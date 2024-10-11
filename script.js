@@ -34,7 +34,7 @@ var contrast = false;
 var numShapes = 150;
 var strokeWidth = 10;
 var shapeSize = 140;
-var shapeMargin = 20;
+var shapeMargin = 50;
 var alphaNum = true;
 var color = "black";
 var displayFormat = "flex";
@@ -76,10 +76,13 @@ function getRandomAlphaNumericCharacter() {
 }
 
 function generateRandomShapes(generateAlphaNumeric = false) {
+    t1 = performance.now()
+
     alphaNum = generateAlphaNumeric;
     const shapesContainer = document.getElementById("shape-list");
     shapesContainer.innerHTML = "";
 
+    let fragment = '';
     for (let i = 0; i < numShapes; i++) {
         const shape = generateAlphaNumeric ? getRandomAlphaNumericCharacter() : getRandomShape();
         const shapeDiv = document.createElement("div");
@@ -93,9 +96,9 @@ function generateRandomShapes(generateAlphaNumeric = false) {
         shapeDiv.style.fontSize = shapeSize + 30 + "px";
 
         shapeDiv.style.strokeWidth = strokeWidth + "px";
-        shapeDiv.style.stroke = color;
-        shapeDiv.style.color = color;
-        shapeDiv.style.fill = !outline ? color : "transparent";
+        // shapeDiv.style.stroke = color;
+        // shapeDiv.style.color = color;
+        // shapeDiv.style.fill = !outline ? color : "transparent";
 
         shapeDiv.classList.add("item")
 
@@ -105,35 +108,43 @@ function generateRandomShapes(generateAlphaNumeric = false) {
         // shape.style.backgroundColor = getRandomColor();
         // shape.style.transform = `rotate(${getRandomRotation()}deg)`;
 
-        shapesContainer.appendChild(shapeDiv);
+        // shapesContainer.appendChild(shapeDiv);
+        fragment += shapeDiv.outerHTML;
     }
 
-    generatedShapes = shapesContainer.innerHTML;
+    generatedShapes = fragment;
+    shapesContainer.innerHTML = fragment;
 
     handleResize();
     saveLocal();
+
+    t2 = performance.now()
+
+    console.log(t2 - t1)
 }
 
 function handleResize() {
-    var shapesContainer = document.getElementById("shape-list");
+    const shapesContainer = document.getElementById("shape-list");
+    shapesContainer.innerHTML = generatedShapes;  // Restore the previously generated shapes
 
-    shapesContainer.innerHTML = generatedShapes;
-
-    let shapes = document.querySelectorAll('.item');
+    const shapes = Array.from(document.querySelectorAll('.item'));  // Query only once and convert NodeList to array
+    const shapesContainerRect = shapesContainer.getBoundingClientRect();  // Get container bounds only once
+    const shapesToRemove = [];  // Array to store elements to remove
 
     shapes.forEach(shape => {
-        var shapesContainerRect = shapesContainer.getBoundingClientRect();
-        var shapeRect = shape.getBoundingClientRect();
+        const shapeRect = shape.getBoundingClientRect();  // Get each shape's bounds
+        const isColliding = shapeRect.bottom + shapeMargin > shapesContainerRect.bottom;
 
-        var isColliding = shapeRect.bottom + shapeMargin > shapesContainerRect.bottom;
-
-        // Testing purpose
-        // shape.style.opacity = isColliding ? "0.5" : "1";
-
-        if (isColliding && document.querySelectorAll('.item').length > 1) {
-            shape.remove();
+        if (isColliding) {
+            shapesToRemove.push(shape);  // Collect the shape for removal
         }
     });
+
+    const remainingShapeCount = shapes.length - shapesToRemove.length;
+
+    if (remainingShapeCount > 0) {
+        shapesToRemove.forEach(shape => shape.remove());
+    }
 }
 
 function PrintElem() {
@@ -186,14 +197,13 @@ function ChangeContrast(init) {
 
     document.documentElement.classList = !contrast ? "white" : "dark";
 
-    updateShapes(shapes => {
-        shapes.querySelectorAll('.item').forEach(shape => {
-            shape.style.color = color;
-            shape.style.stroke = color;
-            shape.style.fill = !outline ? color : "transparent";
-
-        });
-    });
+    // updateShapes(shapes => {
+    //     shapes.querySelectorAll('.item').forEach(shape => {
+    //         shape.style.color = color;
+    //         shape.style.stroke = color;
+    //         shape.style.fill = !outline ? color : "transparent";
+    //     });
+    // });
 }
 
 function ChangePageFormat(init) {
@@ -234,16 +244,20 @@ function ChangeFillType(init) {
     if (outline) {
         document.getElementById('outline').style.display = 'unset';
         document.getElementById('solid').style.display = 'none';
+        document.getElementById("shape-list").classList.add('outline');
     } else {
         document.getElementById('solid').style.display = 'unset';
         document.getElementById('outline').style.display = 'none';
+        document.getElementById("shape-list").classList.remove('outline');
     }
 
-    updateShapes(shapes => {
-        shapes.querySelectorAll('.item').forEach(shape => {
-            shape.style.fill = !outline ? color : "transparent";
-        });
-    });
+
+
+    // updateShapes(shapes => {
+    //     shapes.querySelectorAll('.item').forEach(shape => {
+    //         shape.style.fill = !outline ? color : "transparent";
+    //     });
+    // });
 }
 
 function ChangeShapeSize(increase) {
@@ -270,13 +284,13 @@ function ChangeShapeSize(increase) {
             });
         });
     } else {
-        cols += (increase ? 1 : -1);
+        cols += (increase ? -1 : 1);
         if (cols < 1) {
-            shapeSize = 1;
             return;
         }
         let shapeList = document.getElementById("shape-list");
         shapeList.style.gridTemplateColumns = `repeat(${cols}, 10fr)`;
+
         handleResize();
     }
 
@@ -302,7 +316,7 @@ function ChangeDisplayFormat(init) {
     shapeList.classList.add(displayFormat === 'flex' ? 'flex' : 'grid');
     shapeList.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
-    
+
     updateShapes(shapes => {
         if (displayFormat === 'flex') {
             shapes.querySelectorAll('.item').forEach(shape => {
@@ -317,8 +331,6 @@ function ChangeDisplayFormat(init) {
                 shape.style.margin = "0";
             });
         }
-
-
     });
 
     handleResize();
@@ -347,7 +359,7 @@ function stopHoldAction() {
 
 function saveLocal() {
     clearTimeout(saveTimeout);
-
+    // localStorage.removeItem('settings')
     saveTimeout = setTimeout(() => {
         localStorage.setItem('settings', JSON.stringify({
             shapeSize,

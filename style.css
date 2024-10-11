@@ -69,13 +69,8 @@ body {
     min-width: 16px;
 }
 
-
-.btn i {
-    /* margin: 0 5px !important; */
-}
-
-
-.btn:hover {
+.btn:hover, 
+.btn:active {
     background-color: black !important;
     color: white;
 }
@@ -101,13 +96,25 @@ body {
     padding: 10px;
 }
 
-.dark #shape-list {
+.dark .grid {
     background-color: white;
 }
 
-.white #shape-list {
+.white .grid {
     background-color: black;
 }
+
+.dark .flex {
+    background-color: #000;
+}
+
+#shape-list.outline .item {
+    fill: transparent;
+}
+
+/* .dark #shape-list.outline .item {
+    fill: transparent;
+} */
 
 .flex {
     display: flex;
@@ -135,28 +142,6 @@ body {
     box-sizing: border-box;
     /* aspect-ratio: 1 / 1; */
 }
-
-/* .grid .item::before, 
-.grid .item::after {
-  content: '';
-  position: absolute;
-  background-color: black;
-  z-index: 1;
-}
-
-.grid .item::after {
-  inline-size: 100vw;
-  block-size: 4px;
-  inset-inline-start: -7px;
-  inset-block-start: -7px;
-}
-
-.grid .item::before {
-  inline-size: 4px;
-  block-size: 100vh;
-  inset-block-start: -8px;
-  inset-inline-start: -8px;
-} */
 
 .a4,
 .a4l {
@@ -195,14 +180,16 @@ body {
 
 .white .item {
     background-color: #fff;
+    color: #000;
+    stroke: #000;
+    fill:#000;
 }
 
 .dark .item{
     background-color: #000;
-}
-
-.item svg {
-    /* width: 80% !important; */
+    color: #fff;
+    stroke: #fff;
+    fill:#fff;
 }
 
 .shape-size-info {
@@ -215,7 +202,7 @@ body {
     font-weight: 600;
     font-size: 25px;
     color: gray;
-    display: none;
+    z-index: 999px;
 }
 
 .shape-size-info i {
