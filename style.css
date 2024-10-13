@@ -185,7 +185,7 @@ body {
     fill:#000;
 }
 
-.dark .item{
+.dark .item {
     background-color: #000;
     color: #fff;
     stroke: #fff;
@@ -193,6 +193,7 @@ body {
 }
 
 .shape-size-info {
+    display: none;
     position: absolute;
     margin-top: 4px;
     text-align: left;
@@ -202,7 +203,7 @@ body {
     font-weight: 600;
     font-size: 25px;
     color: gray;
-    z-index: 999px;
+    z-index: 999;
 }
 
 .shape-size-info i {

@@ -291,6 +291,15 @@ function ChangeShapeSize(increase) {
         let shapeList = document.getElementById("shape-list");
         shapeList.style.gridTemplateColumns = `repeat(${cols}, 10fr)`;
 
+        let sizeInfo = document.getElementsByClassName('shape-size-info')[0];
+        sizeInfo.innerHTML = `${increase ? '<i class="fa-solid fa-up-right-and-down-left-from-center"></i>'
+            : '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>'} ${cols}`;
+        sizeInfo.style.display = "block";
+        clearTimeout(ChangeShapeSizeTimeoutId);
+        ChangeShapeSizeTimeoutId = setTimeout(() => {
+            sizeInfo.style.display = "none";
+        }, 1000);
+
         handleResize();
     }
 
@@ -394,19 +403,19 @@ function Init() {
     const IncholdButton = document.getElementById("incsize");
     const DecholdButton = document.getElementById("decsize");
 
-    IncholdButton.addEventListener("mousedown", startHoldAction);
-    IncholdButton.addEventListener("mouseup", stopHoldAction);
-    IncholdButton.addEventListener("mouseout", stopHoldAction);
-    IncholdButton.addEventListener("touchstart", startHoldAction);
-    IncholdButton.addEventListener("touchend", stopHoldAction);
-    IncholdButton.addEventListener("touchcancel", stopHoldAction);
+    // IncholdButton.addEventListener("mousedown", startHoldAction);
+    // IncholdButton.addEventListener("mouseup", stopHoldAction);
+    // IncholdButton.addEventListener("mouseout", stopHoldAction);
+    // IncholdButton.addEventListener("touchstart", startHoldAction);
+    // IncholdButton.addEventListener("touchend", stopHoldAction);
+    // IncholdButton.addEventListener("touchcancel", stopHoldAction);
 
-    DecholdButton.addEventListener("mousedown", () => startHoldAction(false));
-    DecholdButton.addEventListener("mouseup", stopHoldAction);
-    DecholdButton.addEventListener("mouseout", stopHoldAction);
-    DecholdButton.addEventListener("touchstart", () => startHoldAction(false));
-    DecholdButton.addEventListener("touchend", stopHoldAction);
-    DecholdButton.addEventListener("touchcancel", stopHoldAction);
+    // DecholdButton.addEventListener("mousedown", () => startHoldAction(false));
+    // DecholdButton.addEventListener("mouseup", stopHoldAction);
+    // DecholdButton.addEventListener("mouseout", stopHoldAction);
+    // DecholdButton.addEventListener("touchstart", () => startHoldAction(false));
+    // DecholdButton.addEventListener("touchend", stopHoldAction);
+    // DecholdButton.addEventListener("touchcancel", stopHoldAction);
 
     loadLocal();
 
